@@ -629,6 +629,7 @@ void main()
     Afficher_Tableau_Modifier();
 }
 */
+/* ( exercice 20 )
 int A , B ;
 int temp1 , temp2 , *P1 = &A , *P2 = &B ;
 
@@ -661,4 +662,239 @@ void main()
 
     printf("la nouvelle valeur de A est : %d \n",*P1);
     printf("la nouvelle valeur de B est : %d ",*P2);
+}
+*/
+/* ( exercice 21 )
+void Divisor(int N)
+{
+    for ( int i = 1 ; i <= N/2 ; i++)
+    {
+        if ( N % i == 0 )
+        {
+            printf("%d \t",i);
+        }
+    }
+    
+    printf("\n");
+}
+
+int Sum_Divisor(int N)
+{
+    int S = 0 ;
+
+    for ( int i = 1 ; i <= N/2 ; i++)
+    {
+        if ( N % i == 0 )
+        {
+            S += i ;
+        }
+    }
+
+    return S ;
+}
+
+int Perfect(int N, int S)
+{
+    if ( S == N )
+    {
+        return 1 ;
+    }
+    else
+        return 0 ;
+
+}
+
+void main()
+{
+    int N , S ;
+
+    printf("Enter the value of N : ");
+    scanf("%d",&N);
+
+    printf("The divisors of %d are : \n",N);
+
+    Divisor(N);
+
+    S = Sum_Divisor(N);
+
+    if ( Perfect(N,S) )
+    {
+        printf("%d is a perfect number \n",N);
+    }
+    else 
+    {
+        printf("%d is not a perfect number \n",N);
+    }
+
+}
+*/
+/* ( exercice 22 )
+int Sum_Divisor(int N)
+{
+    int S = 0 ;
+
+    for ( int i = 1 ; i <= N/2 ; i++ )
+    {
+        if ( N % i == 0 )
+        {
+            S += i ;
+        }
+    }
+    
+    return S ;
+}
+
+int Amicable(int A,int B)
+{
+    if ( Sum_Divisor(A) == B && Sum_Divisor(B) == A )
+    {
+        return 1 ;
+    }
+    else
+        return 0 ;
+    
+}
+
+void main()
+{
+    int A , B ;
+
+    printf("Enter the value of A : ");
+    scanf("%d",&A);
+
+    printf("Enter the value of B : ");
+    scanf("%d",&B);
+
+    if ( Amicable(A,B) )
+    {
+        printf("%d and %d are amicable numbers \n",A,B);
+    }
+    else
+    {
+        printf("%d and %d are not amicable numbers.\n",A,B);
+    }
+
+}
+*/
+
+float Filling(float *T,int N)
+{
+    for ( int i = 0 ; i < N ; i++)
+    {
+        printf("T[%d] : ",i+1);
+        scanf("%f",T+i);
+    }
+
+}
+
+float Minimal(float *T,int N)
+{
+    float min ;
+    
+    min = T[0] ; 
+
+    for ( int i = 0 ; i < N ; i++)
+    {
+        if ( min > T[i] )
+        {
+            min = T[i] ;
+        }
+    }
+    
+    return min ;
+}
+
+float Maximal(float *T,int N)
+{
+    float max ;
+    
+    max = T[0] ; 
+
+    for ( int i = 0 ; i < N ; i++)
+    {
+        if ( max < T[i] )
+        {
+            max = T[i] ;
+        }
+    }
+    
+    return max ;
+}
+
+float Average(float *T,int N)
+{
+    float M , S = 0 ;
+
+    for ( int i = 0 ; i < N ; i++)
+    {
+        S += T[i] ;
+    }
+    
+    return M = S / (float)N ;
+
+}
+
+int Occurence(float *T,float X,int N)
+{
+    int cpt = 0 ;
+
+    for ( int i = 0 ; i < N ; i++)
+    {
+        if ( T[i] == X )
+        {
+            cpt++ ;
+        }
+    }
+    
+    return cpt ;
+}
+
+void Sort_of_Notes(float *T,int N)
+{
+    float temp ;
+
+    for ( int i = 0 ; i < N-1 ; i++)
+    {
+        for ( int j = 0 ; j < N ; j++)
+        {
+            if ( T[i] > T[j] )
+            {
+                temp = T[i] ;
+                T[i] = T[j] ;
+                T[j] = temp ;
+            }    
+        }
+    }
+
+}
+
+void main() 
+{ 
+    float T[Nmax] , X ;
+    int N ;
+    
+    printf("Enter the nombers of grades : ");
+    scanf("%d",&N);
+    
+    Filling(T, N);
+
+    printf("The note : \n");
+
+    Display(T, N);
+    
+    printf("\nThe minimal note : %.2f\n",Minimal(T,N));
+    printf("The maximal note : %.2f\n",Maximal(T,N));
+    printf("The average : %.2f\n",Average(T,N));
+
+    printf("\nEnter a nomber to search : "); 
+    scanf("%f", &X); 
+    
+    printf("Nombre of occurrence de %.2f : %d\n",X,Occurence(T,X,N));
+
+    Sort_of_Notes(T,N); 
+    
+    printf("\nThe grades sorts an ascending ordre :\n");
+    
+    Display(T, N);
+
 }
