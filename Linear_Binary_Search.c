@@ -168,7 +168,7 @@ void main()
 
 }
 */
-int N , X , temp , result ;
+int N , X , temp , result1 , result2 ;
 
 void Sort(int T[],int N)
 {
@@ -186,9 +186,9 @@ void Sort(int T[],int N)
     }
 }
 
-int Binary_Search(int T[],int X,int inf,int sup)
+int Binary_Search_First_Occurence(int T[],int X,int inf,int sup)
 {
-    int result = -1 ;
+    int result1 = -1 ;
 
     while ( inf <= sup )
     {
@@ -196,7 +196,8 @@ int Binary_Search(int T[],int X,int inf,int sup)
 
         if ( T[Mil] == X )
         {
-            result = Mil ;
+            result1 = Mil ;
+            sup = Mil - 1 ;
         }
         else if ( T[Mil] < X )
         {
@@ -208,7 +209,42 @@ int Binary_Search(int T[],int X,int inf,int sup)
         }
     }
     
-    return result ;
+    return result1 ;
+}
+
+int Binary_Search_Last_Occurence(int T[],int X,int inf,int sup)
+{
+    int result2 = -1 ;
+
+    while ( inf <= sup )
+    {
+        int Mil = ( inf + sup ) / 2 ;
+
+        if ( T[Mil] == X )
+        {
+            result2 = Mil ;
+            inf = Mil + 1 ;
+        }
+        else if ( T[Mil] < X )
+        {
+            inf = Mil + 1 ;
+        }
+        else
+        {
+            sup = Mil - 1 ;
+        }
+    }
+    
+    return result2 ;
+}
+
+void Display(int T[],int N)
+{
+    for ( int i = 0 ; i < N ; i++)
+    {
+        printf("%d   ",T[i]);
+    }
+    printf("\n");
 }
 
 void main()
@@ -226,15 +262,33 @@ void main()
 
     Sort(T,N);
 
-    Binary_Search(T,X,0,N-1);
+    printf("The table sorts : \n");
 
-    if ( result == -1 )
+    Display(T,N);
+
+    printf("Which number do you want to find : ");
+    scanf("%d",&X);
+
+    result1 = Binary_Search_First_Occurence(T,X,0,N-1);
+
+    if ( result1 == -1 )
     {
         printf("The number cannot be found \n");
     }
     else
     {
-        printf("The numbre %d is found and is located in %d \n",X,result+1);
+        printf("The numbre %d is found and his first occurence is located in %d \n",X,result1+1);
+    }
+
+    result2 = Binary_Search_Last_Occurence(T,X,0,N-1);
+
+    if ( result2 == -1 )
+    {
+        printf("The number cannot be found \n");
+    }
+    else
+    {
+        printf("The numbre %d is found and his last occurence is located in %d \n",X,result2+1);
     }
     
 }
