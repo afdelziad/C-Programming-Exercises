@@ -135,7 +135,7 @@ void Afficher_Service(Service *S)
     
 }
 
-char Recherche_Patient(Service S,char *Identifiant)
+int Recherche_Patient(Service S,char *Identifiant)
 {
     for ( int i = 0 ; i < S.Nombre_Medecin ; i++)
     {
